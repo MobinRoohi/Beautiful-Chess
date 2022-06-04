@@ -1,0 +1,12 @@
+# ninja log v5
+2	1525	1654188501242292835	CMakeFiles/beautifulChess.dir/King.cpp.o	83e4671403e750e8
+3	1537	1654188501251848906	CMakeFiles/beautifulChess.dir/Knight.cpp.o	697da21b9bcbe78f
+3	1545	1654188501263885198	CMakeFiles/beautifulChess.dir/Bishop.cpp.o	78fc46d74e1c18ed
+4	1546	1654188501260195822	CMakeFiles/beautifulChess.dir/Empty.cpp.o	a2ad47036457519a
+4	1554	1654188501274950864	CMakeFiles/beautifulChess.dir/Pawn.cpp.o	6888820cb0d75f42
+2	1559	1654188501278727382	CMakeFiles/beautifulChess.dir/Rook.cpp.o	475b5f5dbcd2419
+2	1560	1654188501278893661	CMakeFiles/beautifulChess.dir/Queen.cpp.o	7738fdaa06fe1963
+0	1645	1654188501366207082	CMakeFiles/beautifulChess.dir/main.cpp.o	7596b7ddac8772bd
+2	1653	1654188501376434451	CMakeFiles/beautifulChess.dir/Piece.cpp.o	a3f4deac8a31a024
+1	1768	1654188501492394896	CMakeFiles/beautifulChess.dir/Board.cpp.o	805775f5f1b96622
+1769	1840	1654188501567609257	beautifulChess	6ef559a092ffeda8
