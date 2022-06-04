@@ -9,7 +9,7 @@ using namespace std;
 int main(){
     Board obj;
 //    obj.printBoard();
-    string t;
+    string t; string t10;
     string t1, t2, t3;
     while(cin >> t){
         if (t != "fin"){
