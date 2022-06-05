@@ -34,8 +34,9 @@ public:
     void drawCell(Cell *cell, RenderWindow &window);
     void drawSelect(float, float, int);
     void drawUnselect();
+    bool piece_is_selected();
     vector<float> clickedWhere(Vector2f a);
-
+    int x1_selected, y1_selected;
     vector<float> clickedCell;
 
 };

@@ -206,11 +206,35 @@ void Board::drawSelect(float x, float y, int sig = 0) {
 void Board::drawUnselect() {
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
-            boardSFML[i][j]->cellSelected = false;
+            if (clickedCell[0] == float(i) && clickedCell[1] == float(j)) {
+                if (boardSFML[i][j]->cellSelected == true) {
+                    boardSFML[i][j]->cellSelected = false;
+                }
+                else {
+                    boardSFML[i][j]->cellSelected = true;
+                }
+            }
+            else {
+                boardSFML[i][j]->cellSelected = false;
+            }
             boardSFML[i][j]->cellSelector = false;
         }
     }
 }
+
+bool Board::piece_is_selected() {
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            if (boardSFML[i][j]->cellSelected) {
+                x1_selected = i;
+                y1_selected = j;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 void Board::run() {
     RenderWindow window(VideoMode(1800, 1600), "BeautifulChess", Style::Close | Style::Titlebar);
     while (window.isOpen()) {
@@ -226,9 +250,25 @@ void Board::run() {
                 mousePositionFloat.y = float(temp.y);
                 clickedCell = clickedWhere(mousePositionFloat);
                 if (clickedCell != vector<float> {-1, -1}) {
-                    drawUnselect();
-                    boardSFML[clickedCell[0]][clickedCell[1]]->cellSelected =
-                            !(boardSFML[clickedCell[0]][clickedCell[1]]->cellSelected);
+//                    boardSFML[clickedCell[0]][clickedCell[1]]->cellSelected =
+//                            !(boardSFML[clickedCell[0]][clickedCell[1]]->cellSelected);
+                    if (piece_is_selected()) {
+                        if (boardSFML[clickedCell[0]][clickedCell[1]]->cellSelector) {
+                            boardSFML[clickedCell[0]][clickedCell[1]] =
+                                    new Cell(boardSFML[x1_selected][y1_selected]->cellPiece,
+                                             clickedCell[0], clickedCell[1], cellSize);
+//                            boardSFML[clickedCell[0]][clickedCell[1]]->shape_circle = boardSFML[x1_selected][y1_selected]->shape_circle;
+//                            boardSFML[clickedCell[0]][clickedCell[1]]->sprite = boardSFML[x1_selected][y1_selected]->sprite;
+//                            boardSFML[clickedCell[0]][clickedCell[1]]->sprite = boardSFML[x1_selected][y1_selected]->sprite;
+                            boardSFML[x1_selected][y1_selected] = new Cell("--", x1_selected, y1_selected, cellSize);
+                        }
+                        else {
+                            drawUnselect();
+                        }
+                    }
+                    else {
+                        drawUnselect();
+                    }
                 }
 //                cout << clickedCell[0] << clickedCell[1];
             }
