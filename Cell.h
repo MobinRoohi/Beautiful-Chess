@@ -18,6 +18,7 @@ public:
     string path;
     float scaler1;
     float scaler2;
+    CircleShape shape_circle;
 
     Cell(string cellPiece, int cellRow, int cellCol, float cellSize);
 

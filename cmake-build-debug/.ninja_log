@@ -71,3 +71,17 @@
 1221	1296	1654401294800941190	beautifulChess	78054feac465eadc
 7	1778	1654401412251932423	CMakeFiles/beautifulChess.dir/Cell.cpp.o	47d2d7c966aa3fa6
 1778	1876	1654401412355535738	beautifulChess	78054feac465eadc
+5	1955	1654427090438035599	CMakeFiles/beautifulChess.dir/King.cpp.o	d33a94c8a6d512d9
+6	1957	1654427090438455533	CMakeFiles/beautifulChess.dir/Knight.cpp.o	7b62242fad32d77c
+7	1958	1654427090437905455	CMakeFiles/beautifulChess.dir/Empty.cpp.o	384e5d61aed7b63d
+5	1959	1654427090442337821	CMakeFiles/beautifulChess.dir/Rook.cpp.o	9f43af982a62263d
+5	1959	1654427090442052435	CMakeFiles/beautifulChess.dir/Bishop.cpp.o	502fde094faf4d0c
+4	1961	1654427090444044004	CMakeFiles/beautifulChess.dir/Queen.cpp.o	affb1e115cb104b2
+6	1966	1654427090449930934	CMakeFiles/beautifulChess.dir/Pawn.cpp.o	7d61b4569964262f
+3	2052	1654427090537073448	CMakeFiles/beautifulChess.dir/main.cpp.o	5e26022861f3d292
+4	2055	1654427090541751922	CMakeFiles/beautifulChess.dir/Piece.cpp.o	372f776988652599
+4	2382	1654427090863532550	CMakeFiles/beautifulChess.dir/Board.cpp.o	b5eaef9f575e1904
+1955	2802	1654427091292956574	CMakeFiles/beautifulChess.dir/Cell.cpp.o	47d2d7c966aa3fa6
+2802	2905	1654427091399684119	beautifulChess	78054feac465eadc
+3	1605	1654430092631370884	CMakeFiles/beautifulChess.dir/Board.cpp.o	b5eaef9f575e1904
+1605	1695	1654430092728802892	beautifulChess	78054feac465eadc

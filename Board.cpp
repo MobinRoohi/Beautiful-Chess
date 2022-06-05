@@ -199,20 +199,60 @@ bool Board::makeMove(int srcRow, int srcCol, int destRow, int destCol){
 //    if (cell->cellPiece != "--")
 //        window.draw(cell->sprite);
 //}
+vector<float> Board::clickedWhere(Vector2f a) {
+    for (int i = 1; i < 9; i++) {
+        for (int j = 1; j < 9; j++) {
+            if (a.y < i * cellSize && a.x < j * cellSize) {
+                return vector<float> {float(i - 1), float(j - 1)};
+            }
+        }
+    }
+    return vector<float> {-1, -1};
+}
+
+void Board::drawSelect(float x, float y, int sig = 0) {
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            if (i == x && j == y)
+                continue;
+            if (makeMove(x, y, i, j)) {
+                boardSFML[i][j]->cellSelector = true;
+            }
+        }
+    }
+}
 
 void Board::run() {
     RenderWindow window(VideoMode(1800, 1600), "BeautifulChess", Style::Close | Style::Titlebar);
-    while(window.isOpen()) {
+    while (window.isOpen()) {
         Event evnt;
         while(window.pollEvent(evnt)) {
             if (evnt.type == Event::Closed) {
                 window.close();
+            }
+            if (Mouse::isButtonPressed(Mouse::Left)) {
+                Vector2i temp = Mouse::getPosition(window);
+                Vector2f mousePositionFloat;
+                mousePositionFloat.x = float(temp.x);
+                mousePositionFloat.y = float(temp.y);
+                clickedCell = clickedWhere(mousePositionFloat);
+                if (clickedCell != vector<float> {-1, -1}) {
+                    boardSFML[clickedCell[0]][clickedCell[1]]->cellSelected =
+                            !(boardSFML[clickedCell[0]][clickedCell[1]]->cellSelected);
+                }
+//                cout << clickedCell[0] << clickedCell[1];
             }
             window.clear();
 
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     window.draw(boardSFML[i][j]->rect);
+//                    if (boardSFML[i][j]->cellSelected == true) {
+//                        drawSelect(i, j);
+//                    }
+//                    if (boardSFML[i][j]->cellSelector) {
+//                        window.draw(boardSFML[i][j]->shape_circle);
+//                    }
                     if (boardSFML[i][j]->cellPiece != "--")
                         window.draw(boardSFML[i][j]->sprite);
                 }

@@ -32,6 +32,10 @@ public:
     bool returnTurn();
     void run();
     void drawCell(Cell *cell, RenderWindow &window);
+    void drawSelect(float, float, int);
+    vector<float> clickedWhere(Vector2f a);
+
+    vector<float> clickedCell;
 
 };
 

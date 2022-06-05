@@ -22,4 +22,7 @@ Cell::Cell(string cellPiece, int cellRow, int cellCol, float cellSize) {
         sprite.setScale(scaler1, scaler2);
         sprite.setPosition(cellSize * float(cellCol), cellSize * float(cellRow));
     }
+    shape_circle.setRadius(40.f);
+    shape_circle.setFillColor(Color (169,169,169));
+    shape_circle.setPosition(Vector2f(cellSize * cellCol, cellSize * cellRow));
 }
