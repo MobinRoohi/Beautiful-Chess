@@ -13,9 +13,9 @@
 
 
 Board::Board(){
+    cellSize = 200;
     getBoard();
     WHITES_TURN = true;
-    cellSize = 200;
     windowSizeHeight = 1600;
     windowSizeWidth = 1800;
 }
@@ -40,7 +40,7 @@ void Board::getBoard(){ // For inputting the chess board!
                 boardSFML[i][j] = new Cell(temp, i, j, cellSize);
             }
             if (temp[0] == 'Q') {
-                Piece *b = new Queen(temp, i, j, );
+                Piece *b = new Queen(temp, i, j);
                 v.push_back(b);
                 boardSFML[i][j] = new Cell(temp, i, j, cellSize);
             }
@@ -194,11 +194,32 @@ bool Board::makeMove(int srcRow, int srcCol, int destRow, int destCol){
     return true;
 }
 
-void Board::run() {
-    RenderWindow window(VideoMode(windowSizeWidth, windowSizeHeight), "BeautifulChess", Style::Close | Style::Titlebar);
-    for (int i = 0; i < 8; i++) {
-        for (int j = 0; j < 8; j++) {
+//void Board::drawCell(Cell *cell, RenderWindow &window) {
+//    window.draw(cell->rect);
+//    if (cell->cellPiece != "--")
+//        window.draw(cell->sprite);
+//}
 
+void Board::run() {
+    RenderWindow window(VideoMode(1800, 1600), "BeautifulChess", Style::Close | Style::Titlebar);
+    while(window.isOpen()) {
+        Event evnt;
+        while(window.pollEvent(evnt)) {
+            if (evnt.type == Event::Closed) {
+                window.close();
+            }
+            window.clear();
+
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    window.draw(boardSFML[i][j]->rect);
+                    if (boardSFML[i][j]->cellPiece != "--")
+                        window.draw(boardSFML[i][j]->sprite);
+                }
+            }
+
+            window.display();
         }
+
     }
 }

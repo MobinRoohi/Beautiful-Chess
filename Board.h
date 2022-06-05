@@ -6,6 +6,7 @@
 
 
 using namespace std;
+using namespace sf;
 
 class Piece;
 class Cell;
@@ -30,6 +31,7 @@ public:
     bool checkmate(char);
     bool returnTurn();
     void run();
+    void drawCell(Cell *cell, RenderWindow &window);
 
 };
 

@@ -12,6 +12,12 @@ public:
     bool cellSelected;
     string cellPiece;
     RectangleShape rect;
+    Color colorGreen;
+    Sprite sprite;
+    Texture texture;
+    string path;
+    float scaler1;
+    float scaler2;
 
     Cell(string cellPiece, int cellRow, int cellCol, float cellSize);
 

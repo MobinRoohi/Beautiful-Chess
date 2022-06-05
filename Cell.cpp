@@ -11,5 +11,15 @@ Cell::Cell(string cellPiece, int cellRow, int cellCol, float cellSize) {
     rect.setSize(Vector2f(cellSize, cellSize));
     if (cellColor == 'W') rect.setFillColor(Color::White);
     else rect.setFillColor(colorGreen);
-    rect.setPosition(Vector2f(cellSize * cellRow, cellSize * cellCol));
+    rect.setPosition(Vector2f(cellSize * cellCol, cellSize * cellRow));
+    if (cellPiece != "--") {
+        path = "/Users/mobin/CLionProjects/beautifulChess/Pieces/" + cellPiece + ".png";
+        texture.loadFromFile(path);
+        texture.setSmooth(true);
+        sprite.setTexture(texture);
+        scaler1 = cellSize / sprite.getTexture()->getSize().x;
+        scaler2 = cellSize / sprite.getTexture()->getSize().y;
+        sprite.setScale(scaler1, scaler2);
+        sprite.setPosition(cellSize * float(cellCol), cellSize * float(cellRow));
+    }
 }
