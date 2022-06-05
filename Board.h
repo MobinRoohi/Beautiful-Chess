@@ -33,6 +33,7 @@ public:
     void run();
     void drawCell(Cell *cell, RenderWindow &window);
     void drawSelect(float, float, int);
+    void drawUnselect();
     vector<float> clickedWhere(Vector2f a);
 
     vector<float> clickedCell;

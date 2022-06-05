@@ -148,50 +148,31 @@ bool Board::checkmate(char checkedColor){
 
 bool Board::makeMove(int srcRow, int srcCol, int destRow, int destCol){
     char color = board[srcRow][srcCol]->returnPiece()[1];
-    if ((color == 'W' && WHITES_TURN) || color == 'B' && !WHITES_TURN){
-    }
-    else{
-        cout << "not your turn\n";
-        return true;
-    }
+//    if ((color == 'W' && WHITES_TURN) || color == 'B' && !WHITES_TURN){
+//    }
+//    else{
+//      cout << "not your turn\n";
+//        return false;
+//    }
     vector<vector<Piece*>> board_Copy = board;
+    if (board[srcRow][srcCol]->returnPiece() == "--") return false;
     if (board[srcRow][srcCol]->move(srcRow, srcCol, destRow, destCol, board)){
         if (!check(false)){
-            char color_checked = (WHITES_TURN) ? 'B': 'W';
-            if (check(true)){
-                if(checkmate(color_checked)){
-                    if (color_checked == 'W'){
-                        cout << "done\n";
-                        cout << "black win";
-                        return false;
-                    }
-                    cout << "done\n";
-                    cout << "white win";
-                    return false;
-                }
-                else{
-                    WHITES_TURN = !WHITES_TURN;
-                    cout << "done\n";
-                    return true;
-                }
-            }
-            else{
-                WHITES_TURN = !WHITES_TURN;
-                cout << "done\n";
-                return true;
-            }
-        }
-        else{
-            cout << "try again\n";
+//            cout << "done\n";
             board = board_Copy;
             return true;
         }
+        else{
+//            cout << "try again\n";
+            board = board_Copy;
+            return false;
+        }
     }
     else{
-        cout << "try again\n";
-        return true;
+//        cout << "try again\n";
+        return false;
     }
-    return true;
+    return false;
 }
 
 //void Board::drawCell(Cell *cell, RenderWindow &window) {
@@ -215,13 +196,21 @@ void Board::drawSelect(float x, float y, int sig = 0) {
         for (int j = 0; j < 8; j++) {
             if (i == x && j == y)
                 continue;
-            if (makeMove(x, y, i, j)) {
+            if (makeMove(int(x), int(y), i, j)) {
                 boardSFML[i][j]->cellSelector = true;
             }
         }
     }
 }
 
+void Board::drawUnselect() {
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            boardSFML[i][j]->cellSelected = false;
+            boardSFML[i][j]->cellSelector = false;
+        }
+    }
+}
 void Board::run() {
     RenderWindow window(VideoMode(1800, 1600), "BeautifulChess", Style::Close | Style::Titlebar);
     while (window.isOpen()) {
@@ -237,6 +226,7 @@ void Board::run() {
                 mousePositionFloat.y = float(temp.y);
                 clickedCell = clickedWhere(mousePositionFloat);
                 if (clickedCell != vector<float> {-1, -1}) {
+                    drawUnselect();
                     boardSFML[clickedCell[0]][clickedCell[1]]->cellSelected =
                             !(boardSFML[clickedCell[0]][clickedCell[1]]->cellSelected);
                 }
@@ -247,12 +237,12 @@ void Board::run() {
             for (int i = 0; i < 8; i++) {
                 for (int j = 0; j < 8; j++) {
                     window.draw(boardSFML[i][j]->rect);
-//                    if (boardSFML[i][j]->cellSelected == true) {
-//                        drawSelect(i, j);
-//                    }
-//                    if (boardSFML[i][j]->cellSelector) {
-//                        window.draw(boardSFML[i][j]->shape_circle);
-//                    }
+                    if (boardSFML[i][j]->cellSelected == true) {
+                        drawSelect(i, j);
+                    }
+                    if (boardSFML[i][j]->cellSelector) {
+                        window.draw(boardSFML[i][j]->shape_circle);
+                    }
                     if (boardSFML[i][j]->cellPiece != "--")
                         window.draw(boardSFML[i][j]->sprite);
                 }
