@@ -3,7 +3,9 @@
 #include <iostream>
 #include <vector>
 #include "Board.h"
+
 using namespace std;
+using namespace sf;
 
 class Piece{
 protected:

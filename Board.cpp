@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "Piece.h"
+#include "Cell.h"
 #include "King.h"
 #include "Queen.h"
 #include "Rook.h"
@@ -14,6 +15,9 @@
 Board::Board(){
     getBoard();
     WHITES_TURN = true;
+    cellSize = 200;
+    windowSizeHeight = 1600;
+    windowSizeWidth = 1800;
 }
 
 bool Board::returnTurn() {
@@ -21,6 +25,10 @@ bool Board::returnTurn() {
 }
 
 void Board::getBoard(){ // For inputting the chess board!
+    boardSFML.resize(8);
+    for (int i = 0; i < 8; i++) {
+        boardSFML[i].resize(8);
+    }
     string temp;
     for (int i = 0; i < 8; i++) {
         std::vector<Piece*> v;
@@ -29,30 +37,37 @@ void Board::getBoard(){ // For inputting the chess board!
             if (temp[0] == 'K') {
                 Piece *a = new King(temp, i, j);
                 v.push_back(a);
+                boardSFML[i][j] = new Cell(temp, i, j, cellSize);
             }
             if (temp[0] == 'Q') {
-                Piece *b = new Queen(temp, i, j);
+                Piece *b = new Queen(temp, i, j, );
                 v.push_back(b);
+                boardSFML[i][j] = new Cell(temp, i, j, cellSize);
             }
             if (temp[0] == 'R') {
                 Piece *c = new Rook(temp, i, j);
                 v.push_back(c);
+                boardSFML[i][j] = new Cell(temp, i, j, cellSize);
             }
             if (temp[0] == 'B') {
                 Piece *d = new Bishop(temp, i, j);
                 v.push_back(d);
+                boardSFML[i][j] = new Cell(temp, i, j, cellSize);
             }
             if (temp[0] == 'N') {
                 Piece *e = new Knight(temp, i, j);
                 v.push_back(e);
+                boardSFML[i][j] = new Cell(temp, i, j, cellSize);
             }
             if (temp[0] == 'P') {
                 Piece *f = new Pawn(temp, i, j);
                 v.push_back(f);
+                boardSFML[i][j] = new Cell(temp, i, j, cellSize);
             }
             if (temp[0] == '-'){
                 Piece *g = new Empty(temp, i, j);
                 v.push_back(g);
+                boardSFML[i][j] = new Cell(temp, i, j, cellSize);
             }
         }
         board.push_back(v);
@@ -179,3 +194,11 @@ bool Board::makeMove(int srcRow, int srcCol, int destRow, int destCol){
     return true;
 }
 
+void Board::run() {
+    RenderWindow window(VideoMode(windowSizeWidth, windowSizeHeight), "BeautifulChess", Style::Close | Style::Titlebar);
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+
+        }
+    }
+}

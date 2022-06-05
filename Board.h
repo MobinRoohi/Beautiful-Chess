@@ -1,5 +1,6 @@
 #ifndef BEAUTIFULCHESS_BOARD_H
 #define BEAUTIFULCHESS_BOARD_H
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
 
@@ -7,11 +8,18 @@
 using namespace std;
 
 class Piece;
+class Cell;
 
 class Board{
 protected:
     vector<vector<Piece*>> board;
+    vector<vector<Cell*>> boardSFML;
     bool WHITES_TURN;
+    bool CHECK_MATE;
+    char winner;
+    float cellSize;
+    float windowSizeWidth;
+    float windowSizeHeight;
 public:
     Board();
     void getBoard();
@@ -21,6 +29,7 @@ public:
     bool check(bool);
     bool checkmate(char);
     bool returnTurn();
+    void run();
 
 };
 
