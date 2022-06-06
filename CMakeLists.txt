@@ -8,4 +8,5 @@ include_directories(/usr/local/include)
 
 find_package(SFML 2.5 COMPONENTS system window graphics network audio REQUIRED)
 include_directories(${SFML_INCLUDE_DIRS})
+include_directories(/Users/mobin/CLionProjects/beautifulChess)
 target_link_libraries(beautifulChess sfml-system sfml-window sfml-graphics sfml-audio sfml-network)

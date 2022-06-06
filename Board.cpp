@@ -155,38 +155,26 @@ bool Board::checkmate(char checkedColor){
 
 bool Board::makeMove(int srcRow, int srcCol, int destRow, int destCol){
     char color = board[srcRow][srcCol]->returnPiece()[1];
-//    if ((color == 'W' && WHITES_TURN) || color == 'B' && !WHITES_TURN){
-//    }
-//    else{
-//      cout << "not your turn\n";
-//        return false;
-//    }
+
     vector<vector<Piece*>> board_Copy = board;
     if (board[srcRow][srcCol]->returnPiece() == "--") return false;
     if (board[srcRow][srcCol]->move(srcRow, srcCol, destRow, destCol, board)){
         if (!check(false)){
-//            cout << "done\n";
             board = board_Copy;
             return true;
         }
         else{
-//            cout << "try again\n";
             board = board_Copy;
             return false;
         }
     }
     else{
-//        cout << "try again\n";
         return false;
     }
     return false;
 }
 
-//void Board::drawCell(Cell *cell, RenderWindow &window) {
-//    window.draw(cell->rect);
-//    if (cell->cellPiece != "--")
-//        window.draw(cell->sprite);
-//}
+
 vector<float> Board::clickedWhere(Vector2f a) {
     for (int i = 1; i < 9; i++) {
         for (int j = 1; j < 9; j++) {
@@ -195,8 +183,7 @@ vector<float> Board::clickedWhere(Vector2f a) {
             }
         }
     }
-    if (1650 <= a.x && a.x <= 1750 && 600 <= a.y && a.y <= 650) {
-        cout << "reset" <<endl;
+    if (1650 <= a.x && a.x <= 1750 && 200 <= a.y && a.y <= 250) {
         return vector<float> {-2, -2};
     }
     return vector<float> {-1, -1};
@@ -289,8 +276,6 @@ void Board::run() {
                 mousePositionFloat.y = float(temp.y);
                 clickedCell = clickedWhere(mousePositionFloat);
                 if (clickedCell != vector<float> {-1, -1} && clickedCell != vector<float> {-2, -2}) {
-//                    boardSFML[clickedCell[0]][clickedCell[1]]->cellSelected =
-//                            !(boardSFML[clickedCell[0]][clickedCell[1]]->cellSelected);
                     if (piece_is_selected()) {
                         if (boardSFML[clickedCell[0]][clickedCell[1]]->cellSelector) {
                             board[x1_selected][y1_selected]->move(x1_selected, y1_selected,
@@ -298,11 +283,8 @@ void Board::run() {
                             boardSFML[clickedCell[0]][clickedCell[1]] =
                                     new Cell(boardSFML[x1_selected][y1_selected]->cellPiece,
                                              clickedCell[0], clickedCell[1], cellSize);
-//                            boardSFML[clickedCell[0]][clickedCell[1]]->shape_circle = boardSFML[x1_selected][y1_selected]->shape_circle;
-//                            boardSFML[clickedCell[0]][clickedCell[1]]->sprite = boardSFML[x1_selected][y1_selected]->sprite;
-//                            boardSFML[clickedCell[0]][clickedCell[1]]->sprite = boardSFML[x1_selected][y1_selected]->sprite;
                             boardSFML[x1_selected][y1_selected] = new Cell("--", x1_selected, y1_selected, cellSize);
-//                            for (int i = 0;)
+
                             if (!check(false) || !check(true)) {
                                 string t = (WHITES_TURN == true) ? "KB" : "KW";
                                 for (int i = 0; i < 8; i++) {
@@ -353,7 +335,6 @@ void Board::run() {
                     CHECK_MATE = false;
 
                 }
-//                cout << clickedCell[0] << clickedCell[1];
             }
             window.clear();
 
@@ -379,6 +360,7 @@ void Board::run() {
             if (CHECK_MATE) {
                 st_text = "Checkmate!\n" + winner + " Wins!";
             }
+            Text resetText;
             statusText.setString(st_text);
             statusText.setCharacterSize(24);
             statusText.setPosition(1620, 20);
@@ -387,8 +369,17 @@ void Board::run() {
             RectangleShape resetBox;
             resetBox.setSize(Vector2f(100, 50));
             resetBox.setFillColor(Color::Red);
-            resetBox.setPosition(1650, 600);
+            resetBox.setPosition(1650, 200);
+            resetBox.setOutlineThickness(2);
+            resetBox.setOutlineColor(Color::White);
             window.draw(resetBox);
+            resetText.setFont(status_font);
+            resetText.setString("Reset");
+            resetText.setCharacterSize(24);
+            resetText.setPosition(1665, 207);
+            resetText.setFillColor(Color::White);
+            resetText.setStyle(Text::Bold);
+            window.draw(resetText);
 
             window.display();
         }
