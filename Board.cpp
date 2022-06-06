@@ -287,6 +287,14 @@ void Board::run() {
                                         }
                                     }
                                 }
+                                char color_checked = (WHITES_TURN) ? 'B': 'W';
+                                if(checkmate(color_checked)){
+                                    if (color_checked == 'W'){
+                                        cout << "black win";
+                                    } else {
+                                        cout << "white win";
+                                    }
+                                }
                             }
                             WHITES_TURN = !WHITES_TURN;
 
