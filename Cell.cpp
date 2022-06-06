@@ -23,12 +23,8 @@ Cell::Cell(string cellPiece, int cellRow, int cellCol, float cellSize) {
         sprite.setPosition(cellSize * float(cellCol), cellSize * float(cellRow));
     }
     shape_circle.setRadius(30.f);
-//    if (cellColor == 'W') shape_circle.setFillColor(Color::White);
-//    else shape_circle.setFillColor(Color (119,149,86));
-
     shape_circle.setPosition(Vector2f(cellSize * cellCol + cellSize / 2 - 30, cellSize * cellRow + cellSize / 2 - 30));
     shape_circle.setFillColor(Color (169,169,169));
-//    shape_circle.setOutlineThickness(15.f);
     shape_circle.setOutlineColor(Color(169,169,169));
     shape_circle.setPointCount(1000);
 
