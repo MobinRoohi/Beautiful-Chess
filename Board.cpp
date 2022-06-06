@@ -183,7 +183,7 @@ vector<float> Board::clickedWhere(Vector2f a) {
             }
         }
     }
-    if (1650 <= a.x && a.x <= 1750 && 200 <= a.y && a.y <= 250) {
+    if (1650 <= a.x && a.x <= 1750 && 132 <= a.y && a.y <= 182) {
         return vector<float> {-2, -2};
     }
     return vector<float> {-1, -1};
@@ -275,14 +275,14 @@ void Board::textManager(RenderWindow &window) {
     window.draw(statusText);
     resetBox.setSize(Vector2f(100, 50));
     resetBox.setFillColor(Color::Red);
-    resetBox.setPosition(1650, 200);
+    resetBox.setPosition(1650, 132);
     resetBox.setOutlineThickness(2);
     resetBox.setOutlineColor(Color::White);
     window.draw(resetBox);
     resetText.setFont(status_font);
     resetText.setString("Reset");
     resetText.setCharacterSize(24);
-    resetText.setPosition(1665, 207);
+    resetText.setPosition(1665, 139);
     resetText.setFillColor(Color::White);
     resetText.setStyle(Text::Bold);
 
