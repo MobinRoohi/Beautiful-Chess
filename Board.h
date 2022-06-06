@@ -14,10 +14,12 @@ class Cell;
 class Board{
 protected:
     vector<vector<Piece*>> board;
+    vector<vector<Piece*>> initial_board;
     vector<vector<Cell*>> boardSFML;
+    vector<vector<Cell*>> initial_boardSFML;
     bool WHITES_TURN;
     bool CHECK_MATE;
-    char winner;
+    string winner;
     float cellSize;
     float windowSizeWidth;
     float windowSizeHeight;

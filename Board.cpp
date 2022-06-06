@@ -18,6 +18,8 @@ Board::Board(){
     WHITES_TURN = true;
     windowSizeHeight = 1600;
     windowSizeWidth = 1800;
+    initial_board = board;
+    initial_boardSFML = boardSFML;
 }
 
 bool Board::returnTurn() {
@@ -188,6 +190,10 @@ vector<float> Board::clickedWhere(Vector2f a) {
             }
         }
     }
+    if (1650 <= a.x && a.x <= 1750 && 600 <= a.y && a.y <= 650) {
+        cout << "reset" <<endl;
+        return vector<float> {-2, -2};
+    }
     return vector<float> {-1, -1};
 }
 
@@ -290,9 +296,11 @@ void Board::run() {
                                 char color_checked = (WHITES_TURN) ? 'B': 'W';
                                 if(checkmate(color_checked)){
                                     if (color_checked == 'W'){
-                                        cout << "black win";
+                                        CHECK_MATE = true;
+                                        winner = "Black";
                                     } else {
-                                        cout << "white win";
+                                        CHECK_MATE = true;
+                                        winner = "White";
                                     }
                                 }
                             }
@@ -325,6 +333,25 @@ void Board::run() {
                         window.draw(boardSFML[i][j]->sprite);
                 }
             }
+            Text statusText;
+            Font status_font;
+            status_font.loadFromFile("/Users/mobin/CLionProjects/beautifulChess/Font/Arial Unicode.ttf");
+            statusText.setFont(status_font);
+            String st_text;
+            st_text = (WHITES_TURN) ? "White's Turn" : "Black's Turn";
+            if (CHECK_MATE) {
+                st_text = winner + " Wins!";
+            }
+            statusText.setString(st_text);
+            statusText.setCharacterSize(24);
+            statusText.setPosition(1620, 20);
+            statusText.setStyle(Text::Bold);
+            window.draw(statusText);
+            RectangleShape resetBox;
+            resetBox.setSize(Vector2f(100, 50));
+            resetBox.setFillColor(Color::Red);
+            resetBox.setPosition(1650, 600);
+            window.draw(resetBox);
 
             window.display();
         }
