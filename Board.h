@@ -19,7 +19,8 @@ protected:
     bool CHECK_MATE;
     char winner;
     float cellSize;
-
+    float windowSizeWidth;
+    float windowSizeHeight;
 public:
     Board();
     void getBoard();
