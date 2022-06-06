@@ -289,6 +289,7 @@ void Board::run() {
                                 }
                             }
                             WHITES_TURN = !WHITES_TURN;
+
                             drawUnselect();
                         }
                         else {
