@@ -274,7 +274,7 @@ void Board::textManager(RenderWindow &window) {
     statusText.setStyle(Text::Bold);
     window.draw(statusText);
     resetBox.setSize(Vector2f(100, 50));
-    resetBox.setFillColor(Color::Red);
+    resetBox.setFillColor(Color (119,149,86));
     resetBox.setPosition(1650, 132);
     resetBox.setOutlineThickness(2);
     resetBox.setOutlineColor(Color::White);
