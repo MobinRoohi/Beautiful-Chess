@@ -259,7 +259,35 @@ void Board::initialize_CopyVectors() {
     }
 }
 
+void Board::textManager(RenderWindow &window) {
+    status_font.loadFromFile("/Users/mobin/CLionProjects/beautifulChess/Font/Arial Unicode.ttf");
+    statusText.setFont(status_font);
+    String st_text;
+    st_text = (WHITES_TURN) ? "White's Turn" : "Black's Turn";
+    if (CHECK_MATE) {
+        st_text = "Checkmate!\n" + winner + " Wins!";
+    }
+    Text resetText;
+    statusText.setString(st_text);
+    statusText.setCharacterSize(24);
+    statusText.setPosition(1620, 20);
+    statusText.setStyle(Text::Bold);
+    window.draw(statusText);
+    RectangleShape resetBox;
+    resetBox.setSize(Vector2f(100, 50));
+    resetBox.setFillColor(Color::Red);
+    resetBox.setPosition(1650, 200);
+    resetBox.setOutlineThickness(2);
+    resetBox.setOutlineColor(Color::White);
+    window.draw(resetBox);
+    resetText.setFont(status_font);
+    resetText.setString("Reset");
+    resetText.setCharacterSize(24);
+    resetText.setPosition(1665, 207);
+    resetText.setFillColor(Color::White);
+    resetText.setStyle(Text::Bold);
 
+}
 
 void Board::run() {
     RenderWindow window(VideoMode(1800, 1600), "BeautifulChess", Style::Close | Style::Titlebar);
@@ -351,34 +379,9 @@ void Board::run() {
                         window.draw(boardSFML[i][j]->sprite);
                 }
             }
-            Text statusText;
-            Font status_font;
-            status_font.loadFromFile("/Users/mobin/CLionProjects/beautifulChess/Font/Arial Unicode.ttf");
-            statusText.setFont(status_font);
-            String st_text;
-            st_text = (WHITES_TURN) ? "White's Turn" : "Black's Turn";
-            if (CHECK_MATE) {
-                st_text = "Checkmate!\n" + winner + " Wins!";
-            }
-            Text resetText;
-            statusText.setString(st_text);
-            statusText.setCharacterSize(24);
-            statusText.setPosition(1620, 20);
-            statusText.setStyle(Text::Bold);
+            textManager(window);
             window.draw(statusText);
-            RectangleShape resetBox;
-            resetBox.setSize(Vector2f(100, 50));
-            resetBox.setFillColor(Color::Red);
-            resetBox.setPosition(1650, 200);
-            resetBox.setOutlineThickness(2);
-            resetBox.setOutlineColor(Color::White);
             window.draw(resetBox);
-            resetText.setFont(status_font);
-            resetText.setString("Reset");
-            resetText.setCharacterSize(24);
-            resetText.setPosition(1665, 207);
-            resetText.setFillColor(Color::White);
-            resetText.setStyle(Text::Bold);
             window.draw(resetText);
 
             window.display();

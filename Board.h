@@ -40,8 +40,13 @@ public:
     bool piece_is_selected();
     vector<float> clickedWhere(Vector2f a);
     void initialize_CopyVectors();
+    void textManager(RenderWindow &window);
     int x1_selected, y1_selected;
     vector<float> clickedCell;
+    Text statusText;
+    Text resetText;
+    Font status_font;
+    RectangleShape resetBox;
 
 };
 
