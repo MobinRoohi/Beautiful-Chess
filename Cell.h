@@ -10,6 +10,7 @@ public:
     int cellCol;
     bool cellSelector;
     bool cellSelected;
+    bool enemyStationed;
     string cellPiece;
     RectangleShape rect;
     Color colorGreen;
@@ -21,6 +22,8 @@ public:
     CircleShape shape_circle;
 
     Cell(string cellPiece, int cellRow, int cellCol, float cellSize);
+    void addSelectorGraphic(char, char);
+    void checkGraphics(int, int, int);
 
 
 };

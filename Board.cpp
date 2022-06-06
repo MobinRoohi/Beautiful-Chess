@@ -196,9 +196,12 @@ void Board::drawSelect(float x, float y, int sig = 0) {
         for (int j = 0; j < 8; j++) {
             if (i == x && j == y)
                 continue;
-            if (makeMove(int(x), int(y), i, j)) {
+            if (makeMove(int(x), int(y), i, j) &&
+            ((WHITES_TURN == true && board[x][y]->returnPiece()[1] == 'W') ||
+            (WHITES_TURN == false && board[x][y]->returnPiece()[1] == 'B'))) {
                 boardSFML[i][j]->cellSelector = true;
             }
+            boardSFML[i][j]->addSelectorGraphic(boardSFML[x][y]->cellPiece[1], boardSFML[i][j]->cellPiece[1]);
         }
     }
 }
@@ -235,6 +238,8 @@ bool Board::piece_is_selected() {
     return false;
 }
 
+
+
 void Board::run() {
     RenderWindow window(VideoMode(1800, 1600), "BeautifulChess", Style::Close | Style::Titlebar);
     while (window.isOpen()) {
@@ -254,6 +259,8 @@ void Board::run() {
 //                            !(boardSFML[clickedCell[0]][clickedCell[1]]->cellSelected);
                     if (piece_is_selected()) {
                         if (boardSFML[clickedCell[0]][clickedCell[1]]->cellSelector) {
+                            board[x1_selected][y1_selected]->move(x1_selected, y1_selected,
+                                                                  clickedCell[0], clickedCell[1], board);
                             boardSFML[clickedCell[0]][clickedCell[1]] =
                                     new Cell(boardSFML[x1_selected][y1_selected]->cellPiece,
                                              clickedCell[0], clickedCell[1], cellSize);
@@ -261,6 +268,28 @@ void Board::run() {
 //                            boardSFML[clickedCell[0]][clickedCell[1]]->sprite = boardSFML[x1_selected][y1_selected]->sprite;
 //                            boardSFML[clickedCell[0]][clickedCell[1]]->sprite = boardSFML[x1_selected][y1_selected]->sprite;
                             boardSFML[x1_selected][y1_selected] = new Cell("--", x1_selected, y1_selected, cellSize);
+                            if (check(true)) {
+                                string t = (WHITES_TURN == true) ? "KB" : "KW";
+                                for (int i = 0; i < 8; i++) {
+                                    for (int j = 0; j < 8; j++) {
+                                        if (boardSFML[i][j]->cellPiece == t) {
+                                            boardSFML[i][j]->checkGraphics(i, j, 1);
+                                        }
+                                    }
+                                }
+                            }
+                            else {
+                                char t = (WHITES_TURN == true) ? 'W' : 'B';
+                                for (int i = 0; i < 8; i++) {
+                                    for (int j = 0; j < 8; j++) {
+                                        if (boardSFML[i][j]->cellPiece == "K" + t) {
+                                            boardSFML[i][j]->checkGraphics(i, j, 0);
+                                        }
+                                    }
+                                }
+                            }
+                            WHITES_TURN = !WHITES_TURN;
+                            drawUnselect();
                         }
                         else {
                             drawUnselect();
