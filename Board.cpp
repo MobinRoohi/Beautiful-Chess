@@ -349,8 +349,8 @@ void Board::run() {
                     boardSFML = initial_boardSFML;
                     board = initial_board;
                     WHITES_TURN = true;
-                    CHECK_MATE = false;
                     winner = "";
+                    CHECK_MATE = false;
 
                 }
 //                cout << clickedCell[0] << clickedCell[1];
