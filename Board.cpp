@@ -267,13 +267,11 @@ void Board::textManager(RenderWindow &window) {
     if (CHECK_MATE) {
         st_text = "Checkmate!\n" + winner + " Wins!";
     }
-    Text resetText;
     statusText.setString(st_text);
     statusText.setCharacterSize(24);
     statusText.setPosition(1620, 20);
     statusText.setStyle(Text::Bold);
     window.draw(statusText);
-    RectangleShape resetBox;
     resetBox.setSize(Vector2f(100, 50));
     resetBox.setFillColor(Color::Red);
     resetBox.setPosition(1650, 200);
