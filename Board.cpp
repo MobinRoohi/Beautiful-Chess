@@ -260,7 +260,7 @@ void Board::run() {
                 mousePositionFloat.x = float(temp.x);
                 mousePositionFloat.y = float(temp.y);
                 clickedCell = clickedWhere(mousePositionFloat);
-                if (clickedCell != vector<float> {-1, -1}) {
+                if (clickedCell != vector<float> {-1, -1} && clickedCell != vector<float> {-2, -2}) {
 //                    boardSFML[clickedCell[0]][clickedCell[1]]->cellSelected =
 //                            !(boardSFML[clickedCell[0]][clickedCell[1]]->cellSelected);
                     if (piece_is_selected()) {
@@ -316,6 +316,18 @@ void Board::run() {
                         drawUnselect();
                     }
                 }
+                if (clickedCell == vector<float> {-2, -2}) {
+                    boardSFML = initial_boardSFML;
+                    board = initial_board;
+                    WHITES_TURN = true;
+                    CHECK_MATE = false;
+                    winner = "";
+                    for (int i = 0; i < 8; i++) {
+                        for (int j = 0; j < 8; j++) {
+                            boardSFML[i][j]->checkGraphics(i, j, 0);
+                        }
+                    }
+                }
 //                cout << clickedCell[0] << clickedCell[1];
             }
             window.clear();
@@ -340,7 +352,7 @@ void Board::run() {
             String st_text;
             st_text = (WHITES_TURN) ? "White's Turn" : "Black's Turn";
             if (CHECK_MATE) {
-                st_text = winner + " Wins!";
+                st_text = "Checkmate!\n" + winner + " Wins!";
             }
             statusText.setString(st_text);
             statusText.setCharacterSize(24);
