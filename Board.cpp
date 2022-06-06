@@ -18,8 +18,6 @@ Board::Board(){
     WHITES_TURN = true;
     windowSizeHeight = 1600;
     windowSizeWidth = 1800;
-    initial_board = board;
-    initial_boardSFML = boardSFML;
 }
 
 bool Board::returnTurn() {
@@ -28,8 +26,14 @@ bool Board::returnTurn() {
 
 void Board::getBoard(){ // For inputting the chess board!
     boardSFML.resize(8);
+    initial_board.resize(8);
+    initial_boardSFML.resize(8);
+    inputVec.resize(8);
     for (int i = 0; i < 8; i++) {
         boardSFML[i].resize(8);
+        initial_board[i].resize(8);
+        initial_boardSFML[i].resize(8);
+        inputVec[i].resize(8);
     }
     string temp;
     for (int i = 0; i < 8; i++) {
@@ -71,6 +75,7 @@ void Board::getBoard(){ // For inputting the chess board!
                 v.push_back(g);
                 boardSFML[i][j] = new Cell(temp, i, j, cellSize);
             }
+            inputVec[i][j] = temp;
         }
         board.push_back(v);
     }
@@ -244,6 +249,29 @@ bool Board::piece_is_selected() {
     return false;
 }
 
+void Board::initialize_CopyVectors() {
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            if (inputVec[i][j][0] == 'K') {
+                initial_board[i][j] = new King(inputVec[i][j], i, j);
+            }if (inputVec[i][j][0] == 'Q') {
+                initial_board[i][j] = new Queen(inputVec[i][j], i, j);
+            }if (inputVec[i][j][0] == 'R') {
+                initial_board[i][j] = new Rook(inputVec[i][j], i, j);
+            }if (inputVec[i][j][0] == 'B') {
+                initial_board[i][j] = new Bishop(inputVec[i][j], i, j);
+            }if (inputVec[i][j][0] == 'N') {
+                initial_board[i][j] = new Knight(inputVec[i][j], i, j);
+            }if (inputVec[i][j][0] == 'P') {
+                initial_board[i][j] = new Pawn(inputVec[i][j], i, j);
+            }if (inputVec[i][j][0] == '-') {
+                initial_board[i][j] = new Empty(inputVec[i][j], i, j);
+            }
+            initial_boardSFML[i][j] = new Cell(inputVec[i][j], i, j, cellSize);
+        }
+    }
+}
+
 
 
 void Board::run() {
@@ -317,16 +345,13 @@ void Board::run() {
                     }
                 }
                 if (clickedCell == vector<float> {-2, -2}) {
+                    initialize_CopyVectors();
                     boardSFML = initial_boardSFML;
                     board = initial_board;
                     WHITES_TURN = true;
                     CHECK_MATE = false;
                     winner = "";
-                    for (int i = 0; i < 8; i++) {
-                        for (int j = 0; j < 8; j++) {
-                            boardSFML[i][j]->checkGraphics(i, j, 0);
-                        }
-                    }
+
                 }
 //                cout << clickedCell[0] << clickedCell[1];
             }

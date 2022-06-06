@@ -17,6 +17,7 @@ protected:
     vector<vector<Piece*>> initial_board;
     vector<vector<Cell*>> boardSFML;
     vector<vector<Cell*>> initial_boardSFML;
+    vector<vector<string>> inputVec;
     bool WHITES_TURN;
     bool CHECK_MATE;
     string winner;
@@ -38,6 +39,7 @@ public:
     void drawUnselect();
     bool piece_is_selected();
     vector<float> clickedWhere(Vector2f a);
+    void initialize_CopyVectors();
     int x1_selected, y1_selected;
     vector<float> clickedCell;
 
