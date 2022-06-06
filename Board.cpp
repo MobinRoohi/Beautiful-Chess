@@ -267,6 +267,7 @@ void Board::textManager(RenderWindow &window) {
     if (CHECK_MATE) {
         st_text = "Checkmate!\n" + winner + " Wins!";
     }
+    st_text += "\n------------------";
     statusText.setString(st_text);
     statusText.setCharacterSize(24);
     statusText.setPosition(1620, 20);
@@ -287,8 +288,18 @@ void Board::textManager(RenderWindow &window) {
 
 }
 
+void Board::soundSetting() {
+    placingPieceWAV.loadFromFile("/Users/mobin/CLionProjects/beautifulChess/Sounds/placingChessPiece.wav");
+    checkmateWAV.loadFromFile("/Users/mobin/CLionProjects/beautifulChess/Sounds/checkmateSound.wav");
+    whoooshWAV.loadFromFile("/Users/mobin/CLionProjects/beautifulChess/Sounds/whooosh.wav");
+    placingPieceSound.setBuffer(placingPieceWAV);
+    checkmateSound.setBuffer(checkmateWAV);
+    whooosh.setBuffer(whoooshWAV);
+}
+
 void Board::run() {
     RenderWindow window(VideoMode(1800, 1600), "BeautifulChess", Style::Close | Style::Titlebar);
+    soundSetting();
     while (window.isOpen()) {
         Event evnt;
         while(window.pollEvent(evnt)) {
@@ -310,7 +321,7 @@ void Board::run() {
                                     new Cell(boardSFML[x1_selected][y1_selected]->cellPiece,
                                              clickedCell[0], clickedCell[1], cellSize);
                             boardSFML[x1_selected][y1_selected] = new Cell("--", x1_selected, y1_selected, cellSize);
-
+                            placingPieceSound.play();
                             if (!check(false) || !check(true)) {
                                 string t = (WHITES_TURN == true) ? "KB" : "KW";
                                 for (int i = 0; i < 8; i++) {
@@ -329,6 +340,7 @@ void Board::run() {
                                         }
                                     }
                                 }
+                                bool tempBool = CHECK_MATE;
                                 char color_checked = (WHITES_TURN) ? 'B': 'W';
                                 if(checkmate(color_checked)){
                                     if (color_checked == 'W'){
@@ -338,6 +350,8 @@ void Board::run() {
                                         CHECK_MATE = true;
                                         winner = "White";
                                     }
+                                    if (!tempBool)
+                                        checkmateSound.play();
                                 }
                             }
                             WHITES_TURN = !WHITES_TURN;
@@ -359,6 +373,7 @@ void Board::run() {
                     WHITES_TURN = true;
                     winner = "";
                     CHECK_MATE = false;
+                    whooosh.play();
 
                 }
             }

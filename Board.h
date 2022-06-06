@@ -1,6 +1,7 @@
 #ifndef BEAUTIFULCHESS_BOARD_H
 #define BEAUTIFULCHESS_BOARD_H
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 #include <vector>
 
@@ -43,10 +44,18 @@ public:
     void textManager(RenderWindow &window);
     int x1_selected, y1_selected;
     vector<float> clickedCell;
+    void soundSetting();
     Text statusText;
     Text resetText;
     Font status_font;
     RectangleShape resetBox;
+    SoundBuffer placingPieceWAV;
+    SoundBuffer checkmateWAV;
+    SoundBuffer whoooshWAV;
+    Sound placingPieceSound;
+    Sound checkmateSound;
+    Sound whooosh;
+
 
 };
 
