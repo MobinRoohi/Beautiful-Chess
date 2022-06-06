@@ -268,22 +268,22 @@ void Board::run() {
 //                            boardSFML[clickedCell[0]][clickedCell[1]]->sprite = boardSFML[x1_selected][y1_selected]->sprite;
 //                            boardSFML[clickedCell[0]][clickedCell[1]]->sprite = boardSFML[x1_selected][y1_selected]->sprite;
                             boardSFML[x1_selected][y1_selected] = new Cell("--", x1_selected, y1_selected, cellSize);
+//                            for (int i = 0;)
+                            if (!check(false) || !check(true)) {
+                                string t = (WHITES_TURN == true) ? "KB" : "KW";
+                                for (int i = 0; i < 8; i++) {
+                                    for (int j = 0; j < 8; j++) {
+                                        boardSFML[i][j]->checkGraphics(i, j, 0);
+                                    }
+                                }
+                            }
+
                             if (check(true)) {
                                 string t = (WHITES_TURN == true) ? "KB" : "KW";
                                 for (int i = 0; i < 8; i++) {
                                     for (int j = 0; j < 8; j++) {
                                         if (boardSFML[i][j]->cellPiece == t) {
                                             boardSFML[i][j]->checkGraphics(i, j, 1);
-                                        }
-                                    }
-                                }
-                            }
-                            else {
-                                char t = (WHITES_TURN == true) ? 'W' : 'B';
-                                for (int i = 0; i < 8; i++) {
-                                    for (int j = 0; j < 8; j++) {
-                                        if (boardSFML[i][j]->cellPiece == "K" + t) {
-                                            boardSFML[i][j]->checkGraphics(i, j, 0);
                                         }
                                     }
                                 }
